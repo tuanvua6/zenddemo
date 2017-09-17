@@ -1,0 +1,49 @@
+<!-- application/views/scripts/guestbook/index.phtml -->
+     
+<p style="float:left;width:100%;">Danh sách người dùng: </p>           
+<table>
+	<tr style="background-color:#c0c0c0;">
+		<th>Mã ID</th>
+		<th>UserName</th>
+		<th>FullName</th>
+		<th>Email</th>
+		<th>DateCreated</th>
+		<th>Action</th>
+	</tr>
+	<?php foreach ($this->entries as $entry): ?>
+	<tr>
+		<td style="width:50px;">
+			<?php echo $this->escape($entry->userid) ?>
+		</td>
+		<td style="width:200px;">
+			<?php echo $this->escape($entry->username) ?>
+		</td>
+		<td style="width:200px;">
+			<?php echo $this->escape($entry->fullname) ?>
+		</td>
+		<td style="width:200px;">
+			<?php echo $this->escape($entry->email) ?>
+		</td>
+		<td style="width:200px;">
+			<?php echo $this->escape($entry->created) ?>
+		</td>
+		<td>
+			<a href="				
+					<?php echo $this->url(
+						array('controller'=>'guestbook',
+									'action'=>'add'),								
+									'default',
+										true) ?>">Insert
+			</a>
+			<a href="		
+					<?php echo $this->url(
+								array('controller'=>'guestbook',
+									  'action'=>'edit',
+									  'id' => $entry->userid),
+										'default',
+								true) ?>" style="margin-left:5px;" >Update
+			</a>
+		</td>
+	</tr>	
+	<?php endforeach ?>
+</table>
