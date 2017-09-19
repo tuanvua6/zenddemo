@@ -22,7 +22,7 @@ class RestuserController extends Zend_Controller_Action
                                         <username>'.$row->getUsername().'</username>
                                         <fullname>'.$row->getFullname().'</fullname>
                                         <email>'.$row->getEmail().'</email>
-                                        <created>'.$row->getEmail().'</created>
+                                        <created>'.$row->getCreated().'</created>
                                     </value>';
                 }
 
@@ -65,37 +65,35 @@ class RestuserController extends Zend_Controller_Action
 
     public function getAction()
     {
-        try {
-            $request = $this->getRequest();
-
-            $id = $request->getParam('id');
-
+        function getUserByID($username, $password, $id)
+        {
             if($id != 0)
             {
                 $story = new Application_Model_DbTable_Guestbook();
-                $form    = new Application_Form_Adduser();
+                $result = $story->find($id);
+                if($result !=null)
+                {
+                    $xml ='<?xml version="1.0" encoding="ISO-8859-1"?>
+                            <mysite>
+                                <value>
+                                        <id>'.$result->current()->userid.'</id>
+                                        <username>'.$result->current()->username.'</username>
+                                        <fullname>'.$result->current()->fullname.'</fullname>
+                                        <email>'.$result->current()->email.'</email>
+                                        <created>'.$result->current()->created.'</created>
+                                </value>
+                                <code>200</code>
+                            </mysite>';
 
-                $result = $story->find($request->getParam('id'));
-                $form->populate($result->current()->toArray());
-            }
-
-            if ($this->getRequest()->isPost()) {
-                if ($form->isValid($request->getPost())) {
-
-                    $mapper  = new Application_Model_GuestbookMapper();
-                    $updateuser = new Application_Model_Guestbook($form->getValues());
-
-                    $mapper->update($id, $updateuser);
-
-                    return $this->_helper->redirector('index');
+                    $xml = simplexml_load_string($xml);
+                    return $xml;
                 }
             }
-            $this->view->form = $form;
-
-        }
-        catch (Exception $e) {
-            echo $e;
+            return 0;
         }
 
+        $server = new Zend_Rest_Server();
+        $server->addFunction('getUserByID');
+        $server->handle();
     }
 }
