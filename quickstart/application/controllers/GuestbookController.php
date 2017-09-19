@@ -60,6 +60,23 @@ class GuestbookController extends Zend_Controller_Action
         catch (Exception $e) {
             echo $e;
         }
+    }
+    public function deleteAction()
+    {
+        try {
+            $request = $this->getRequest();
+            $id = $request->getParam('id');
+
+            $mapper  = new Application_Model_GuestbookMapper();
+            $mapper->delete($id);
+
+            return $this->_helper->redirector('index');
+        }
+        catch (Exception $e) {
+            echo $e;
+        }
 
     }
+
+
 }

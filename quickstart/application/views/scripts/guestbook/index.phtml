@@ -43,6 +43,14 @@
 										'default',
 								true) ?>" style="margin-left:5px;" >Update
 			</a>
+            <a href="		
+					<?php echo $this->url(
+								array('controller'=>'guestbook',
+									  'action'=>'delete',
+									  'id' => $entry->userid),
+										'default',
+								true) ?>" style="margin-left:5px;" >Delete
+			</a>
 		</td>
 	</tr>	
 	<?php endforeach ?>

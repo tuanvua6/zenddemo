@@ -51,6 +51,15 @@ class Application_Model_GuestbookMapper
         $where = "userid = " . $userid;
         $this->getDbTable()->update($data, $where);
     }
+    public function delete($userid)
+    {
+        $result = $this->getDbTable()->find($userid);
+        if (0 == count($result)) {
+            return;
+        }
+        $where = "userid = " . $userid;
+        $this->getDbTable()->delete($where);
+    }
 
     public function find($userid, Application_Model_Guestbook $guestbook)
     {
