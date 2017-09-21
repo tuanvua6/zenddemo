@@ -30,14 +30,14 @@
 		<td>
 			<a href="				
 					<?php echo $this->url(
-						array('controller'=>'guestbook',
+						array('controller'=>'Guestbook',
 									'action'=>'add'),								
 									'default',
 										true) ?>">Insert
 			</a>
 			<a href="		
 					<?php echo $this->url(
-								array('controller'=>'guestbook',
+								array('controller'=>'Guestbook',
 									  'action'=>'edit',
 									  'id' => $entry->userid),
 										'default',
@@ -45,7 +45,7 @@
 			</a>
             <a href="		
 					<?php echo $this->url(
-								array('controller'=>'guestbook',
+								array('controller'=>'Guestbook',
 									  'action'=>'delete',
 									  'id' => $entry->userid),
 										'default',

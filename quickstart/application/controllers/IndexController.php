@@ -10,22 +10,12 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        function sayHello()
+        $client = new Zend_Rest_Client('http://quickstart.local/Restapi/id/list');
+        foreach ($client ->get()->response as $row)
         {
-            $xml ='<?xml version="1.0" encoding="ISO-8859-1"?>
-                    <mysite>
-                        <value>Hey $who! Hope you\'re having a good $when</value>
-                        <code>200</code>
-                    </mysite>';
-
-            $xml = simplexml_load_string($xml);
-            return $xml;
+            $json = json_encode($row);
+            echo $json;
         }
-
-        $server = new Zend_Rest_Server();
-        $server->addFunction('sayHello');
-
-        $server->handle();
 
     }
 
