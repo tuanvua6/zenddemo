@@ -23,7 +23,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initModules()
     {
-
         $frontController = Zend_Controller_Front::getInstance();
         $restRoute = new Zend_Rest_Route($frontController);
         $frontController->getRouter()->addRoute('default', $restRoute);
@@ -31,7 +30,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $config = Zend_Registry::get('config');
 
         // REST authentication
-        $frontController->registerPlugin(new My_Controller_Plugin_RestAuth($config->threescale->api_key));
+        //$frontController->registerPlugin(new My_Controller_Plugin_RestAuth($config->threescale->api_key));
 
     }
 
