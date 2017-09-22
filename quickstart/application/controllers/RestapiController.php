@@ -20,7 +20,7 @@ class RestapiController extends My_Rest_Controller
         $functionName = $this->_getParam('id');
 
         if ($functionName=='add') {
-            $data = $this->addUsers();
+            $data['response'] = $this->addUsers();
         }
         $data['status'] = 'success';
         $this->sendResponse($data);
@@ -55,8 +55,7 @@ class RestapiController extends My_Rest_Controller
             $created = $this->_getParam('created');
 
             $guestbook = new Application_Model_Guestbook();
-            $guestbook->setUserId($id)
-                         ->setUsername($username)
+            $guestbook ->setUsername($username)
                          ->setFullname($fullname)
                          ->setEmail($email)
                          ->setCreated($created);
